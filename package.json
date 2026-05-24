@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MikeLarry47/my-website-clone#readme",
   "dependencies": {
-    "@mendable/firecrawl-js": "^4.25.0"
+    "@mendable/firecrawl-js": "^4.25.0",
+    "cheerio": "^1.2.0"
   }
 }

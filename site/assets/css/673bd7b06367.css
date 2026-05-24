@@ -1,0 +1,579 @@
+/* ################################################# *
+ *                                                   *
+ * Stylesheet for OpenLayers 3 maps within SlippyMap *
+ *                                                   *
+ * All of the following libraries' CSS were copied   *
+ * here, in this file, to allow the loading of their *
+ * style definition in a single stylesheet:          *
+ *                                                   *
+ * - OL3 (OpenLayers 3)                              *
+ * - OL3-Google-Maps                                 *
+ * - OL3-PanZoom                                     *
+ *                                                   *
+ * The rest contains style definition for other      *
+ * inner libraries:                                  *
+ *                                                   *
+ * - OL3-Ext                                         *
+ * - SlippyMap && Backbone (style for the 2 libs)    *
+ * - SlippyMap                                       *
+ * - Backbone                                        *
+ *                                                   *
+ * ################################################# */
+
+
+/* =============================================== *
+ * OL3 (OpenLayers 3) - Version 3.10.1-61-gc86a61e *
+ * =============================================== */
+
+.ol-box {
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: 2px solid blue;
+}
+
+.ol-mouse-position {
+  top: 8px;
+  right: 8px;
+  position: absolute;
+}
+
+.ol-scale-line {
+  background: #95b9e6;
+  background: rgba(0,60,136,0.3);
+  border-radius: 4px;
+  bottom: 8px;
+  left: 8px;
+  padding: 2px;
+  position: absolute;
+}
+.ol-scale-line-inner {
+  border: 1px solid #eeeeee;
+  border-top: none;
+  color: #eeeeee;
+  font-size: 10px;
+  text-align: center;
+  margin: 1px;
+  will-change: contents, width;
+}
+.ol-overlay-container {
+  will-change: left,right,top,bottom;
+}
+
+.ol-unsupported {
+  display: none;
+}
+.ol-viewport .ol-unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.ol-control {
+  position: absolute;
+  background-color: #eee;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 4px;
+  padding: 2px;
+}
+.ol-control:hover {
+  background-color: rgba(255,255,255,0.6);
+}
+.ol-zoom {
+  top: .5em;
+  left: .5em;
+}
+.ol-rotate {
+  top: .5em;
+  right: .5em;
+  transition: opacity .25s linear, visibility 0s linear;
+}
+.ol-rotate.ol-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s linear, visibility 0s linear .25s;
+}
+.ol-zoom-extent {
+  top: 4.643em;
+  left: .5em;
+}
+.ol-full-screen {
+  right: .5em;
+  top: .5em;
+}
+@media print {
+  .ol-control {
+    display: none;
+  }
+}
+
+.ol-control button {
+  display: block;
+  margin: 1px;
+  padding: 0;
+  color: white;
+  font-size: 1.14em;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  height: 1.375em;
+  width: 1.375em;
+  line-height: .4em;
+  background-color: #7b98bc;
+  background-color: rgba(0,60,136,0.5);
+  border: none;
+  border-radius: 2px;
+}
+.ol-control button::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+.ol-zoom-extent button {
+  line-height: 1.4em;
+}
+.ol-compass {
+  display: block;
+  font-weight: normal;
+  font-size: 1.2em;
+  will-change: transform;
+}
+.ol-touch .ol-control button {
+  font-size: 1.5em;
+}
+.ol-touch .ol-zoom-extent {
+  top: 5.5em;
+}
+.ol-control button:hover,
+.ol-control button:focus {
+  text-decoration: none;
+  background-color: #4c6079;
+  background-color: rgba(0,60,136,0.7);
+}
+.ol-zoom .ol-zoom-in {
+  border-radius: 2px 2px 0 0;
+}
+.ol-zoom .ol-zoom-out {
+  border-radius: 0 0 2px 2px;
+}
+
+
+.ol-attribution {
+  text-align: right;
+  bottom: .5em;
+  right: .5em;
+  max-width: calc(100% - 1.3em);
+}
+
+.ol-attribution ul {
+  margin: 0;
+  padding: 0 .5em;
+  font-size: .7rem;
+  line-height: 1.375em;
+  color: #000;
+  text-shadow: 0 0 2px #fff;
+}
+.ol-attribution li {
+  display: inline;
+  list-style: none;
+  line-height: inherit;
+}
+.ol-attribution li:not(:last-child):after {
+  content: " ";
+}
+.ol-attribution img {
+  max-height: 2em;
+  max-width: inherit;
+}
+.ol-attribution ul, .ol-attribution button {
+  display: inline-block;
+}
+.ol-attribution.ol-collapsed ul {
+  display: none;
+}
+.ol-attribution.ol-logo-only ul {
+  display: block;
+}
+.ol-attribution:not(.ol-collapsed) {
+  background: rgba(255,255,255,0.8);
+}
+.ol-attribution.ol-uncollapsible {
+  bottom: 0;
+  right: 0;
+  border-radius: 4px 0 0;
+  height: 1.1em;
+  line-height: 1em;
+}
+.ol-attribution.ol-logo-only {
+  background: transparent;
+  bottom: .4em;
+  height: 1.1em;
+  line-height: 1em;
+}
+.ol-attribution.ol-uncollapsible img {
+  margin-top: -.2em;
+  max-height: 1.6em;
+}
+.ol-attribution.ol-logo-only button,
+.ol-attribution.ol-uncollapsible button {
+  display: none;
+}
+
+.ol-zoomslider {
+  top: 4.5em;
+  left: .5em;
+  height: 200px;
+}
+.ol-zoomslider button {
+  position: relative;
+  height: 10px;
+}
+
+.ol-touch .ol-zoomslider {
+  top: 5.5em;
+}
+
+.ol-overviewmap {
+  left: 0.5em;
+  bottom: 0.5em;
+}
+.ol-overviewmap.ol-uncollapsible {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 4px 0 0;
+}
+.ol-overviewmap .ol-overviewmap-map,
+.ol-overviewmap button {
+  display: inline-block;
+}
+.ol-overviewmap .ol-overviewmap-map {
+  border: 1px solid #7b98bc;
+  height: 150px;
+  margin: 2px;
+  width: 150px;
+}
+.ol-overviewmap:not(.ol-collapsed) button{
+  bottom: 1px;
+  left: 2px;
+  position: absolute;
+}
+.ol-overviewmap.ol-collapsed .ol-overviewmap-map,
+.ol-overviewmap.ol-uncollapsible button {
+  display: none;
+}
+.ol-overviewmap:not(.ol-collapsed) {
+  background: rgba(255,255,255,0.8);
+}
+.ol-overviewmap-box {
+  border: 2px dotted rgba(0,60,136,0.7);
+}
+
+
+/* =================================== *
+ * OL3-Google-Maps - Revision d8e8dd0  *
+ * =================================== */
+
+.gm-style {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.gm-style .ol-attribution {
+  bottom: 1em;
+}
+
+.gm-style .ol-attribution.ol-logo-only {
+  bottom: 1em;
+}
+
+
+/* =========== *
+ * OL3-PanZoom *
+ * =========== */
+
+/* No style definition, yet */
+
+
+/* ===================================== *
+ * ol3-ext (extensions for OpenLayers 3) *
+ * ===================================== */
+
+
+/* ------------- *
+ * LayerSwitcher *
+ * ------------- */
+
+.ow-layerswitcher {
+  color: #333;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #333;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(102,102,102,0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(102,102,102,0.75);
+  box-shadow: 2px 2px 5px 0px rgba(102,102,102,0.75);
+}
+
+.ow-layerswitcher-layeritem {
+  background-color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  float: left;
+  margin: 1px;
+  padding: 1px;
+  text-align: center;
+  width: 65px;
+}
+
+.ow-layerswitcher-layeritem-active {
+  border: 1px solid black;
+  font-weight: bold;
+  cursor: default;
+}
+
+
+/* ---------------- *
+ * POILayerSwitcher *
+ * ---------------- */
+
+.ow-poilayerswitcher {
+  position: absolute;
+  top: 25px;
+  right: 5px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: smaller;
+  color: black;
+  background-color: transparent;
+}
+
+.ow-poilayerswitcher-panel-layers {
+  padding: 27px 0;
+  background-color: rgba(68, 68, 68, 0.8);
+  border-radius: 7px;
+  float: right;
+  width: 4.5em;
+}
+
+a.ow-poilayerswitcher-nav-prev,
+a.ow-poilayerswitcher-nav-next {
+  cursor: pointer;
+  display: block;
+  height: 24px;
+}
+
+a.ow-poilayerswitcher-nav-prev {
+  background: url('../images/b21f2f2711ee.png') no-repeat scroll center center transparent;
+}
+
+a.ow-poilayerswitcher-nav-prev:hover {
+  background: url('../images/7b71fe06cd22.png') no-repeat scroll center center transparent;
+}
+
+a.ow-poilayerswitcher-nav-next {
+  background: url('../images/6984dbddf96e.png') no-repeat scroll center center transparent;
+}
+
+
+a.ow-poilayerswitcher-nav-next:hover {
+  background: url('../images/4a8ffee8cdb6.png') no-repeat scroll center center transparent;
+}
+
+a.ow-poilayerswitcher-layer {
+  background-position: 2px;
+  background-repeat: no-repeat;
+  border: 2px solid transparent;
+  cursor: pointer;
+  margin: 4px auto;
+  padding: 2px;
+}
+
+/* adube's suggestion: it would be nice to have the border on mouse hover */
+/* a.ow-poilayerswitcher-layer:hover, */
+a.ow-poilayerswitcher-layer-visible {
+  border: 2px solid white;
+}
+
+.ow-poilayerswitcher-panel-labels {
+  float: left;
+}
+
+.ow-poilayerswitcher-label {
+  background-color: rgba(68, 68, 68, 0.8);
+  border-radius: 7px 0 0 7px;
+  color: yellow;
+  padding: 5px;
+  text-align: center;
+  width: 150px;
+}
+
+.ow-poilayerswitcher-label-1 {
+  margin: 60px 0 0 0;
+}
+
+.ow-poilayerswitcher-label-2 {
+  margin: 96px 0 0 0;
+}
+
+.ow-poilayerswitcher-label-3 {
+  margin: 132px 0 0 0;
+}
+
+.ow-poilayerswitcher-label-4 {
+  margin: 170px 0 0 0;
+}
+
+.ow-poilayerswitcher-label-num {
+  margin: 0 0 0 5px;
+}
+
+
+/* -------------------------- *
+ * Popup for POILayerSwitcher *
+ * -------------------------- */
+
+.ow-popup-image {
+  background-image: url('../images/eb26ac292f03.png');
+  background-position: 3px 0px;
+  background-size: 276px 85px;
+  height: 85px;
+  overflow: auto;
+  position: relative;
+  width: 276px;
+}
+
+.ow-popup-image-close {
+  background-image: url('../images/66a8fee28e92.gif');
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  width: 12px;
+}
+
+.w2gi-popup-close {
+  background-image: url('../images/66a8fee28e92.gif');
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  position: absolute;
+  right: 10px;
+  top: 36px;
+  width: 12px;
+}
+
+.ow-popup-image-content {
+  height: calc(100% - 33px);
+  margin: 8px 8px 8px 23px;
+  overflow: auto;
+  position: relative;
+}
+
+.ow-popup-image-list {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+a.ow-popup-image-zoom {
+  display: none;
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  font-size: 16px;
+  background-color: white;
+  border: 2px solid #dddddd;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+a.ow-popup-image-zoom:hover {
+  background-color: yellow;
+}
+
+.ow-popup-image-extent .ow-popup-image-zoom {
+  display: block;
+}
+
+.ow-popup-image-extent .ow-popup-image-content {
+  margin: 8px 8px 8px 37px;
+}
+
+
+/* ===================== *
+ * SlippyMap && Backbone *
+ * ===================== */
+
+.gm-style .ol-attribution {
+  display: none!important;
+}
+
+.w2gi-backbone .map > div,
+#map > div {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.ol-uncollapsible.ol-attribution img {
+  max-width: inherit;
+  width: auto;
+}
+
+
+/* ========= *
+ * SlippyMap *
+ * ========= */
+
+#locator #map {
+  margin: 0;
+}
+
+.ol-uncollapsible.ol-attribution img {
+    max-width: inherit;
+    width: auto;
+}
+
+
+/* ======== *
+ * Backbone *
+ * ======== */
+
+.w2gi-backbone div.map {
+    z-index: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: default;
+}
+
+.w2gi-backbone .ol-panzoom {
+    left: initial!important;
+    right: 50px !important;
+}
+
+.w2gi-backbone .olPopupCloseBox {
+  /*background: url('../images/47949740d636.gif') no-repeat;*/
+  cursor: pointer;
+  width:17px;
+  height:17px;
+}
+
+.w2gi-backbone .poi.maneuver {
+  /* clear:both; */
+}
+
+.w2gi-logo {
+  display: inline-block;
+  width: 80px;
+  height: 18px;
+  background-image: url('../images/4ad3ac48a61f.png');
+  background-size: 100%;
+  background-position-y: 4px;
+  margin-top: -8px;
+  background-repeat: no-repeat;
+}
