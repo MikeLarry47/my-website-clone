@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kids — Orion's</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #111; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Announcement ── */
+    .announcement {
+      background: #111; color: #fff;
+      text-align: center; font-size: 12px;
+      letter-spacing: 0.08em; padding: 10px 16px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 60px;
+      border-bottom: 1px solid #e5e5e5;
+      position: sticky; top: 0; background: #fff; z-index: 100;
+    }
+    .nav-links { display: flex; gap: 28px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-links a:hover { text-decoration: underline; }
+    .nav-links a.active { border-bottom: 2px solid #111; padding-bottom: 2px; }
+    .nav-logo { font-size: 20px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; }
+    .nav-icons { display: flex; gap: 20px; font-size: 13px; align-items: center; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      padding: 14px 32px; font-size: 12px; color: #888;
+      letter-spacing: 0.04em; border-bottom: 1px solid #f0f0f0;
+    }
+    .breadcrumb a { color: #888; }
+    .breadcrumb a:hover { color: #111; }
+    .breadcrumb span { color: #111; font-weight: 600; }
+
+    /* ── Hero Banner ── */
+    .category-hero {
+      position: relative; width: 100%; height: 360px;
+      overflow: hidden; background: #111;
+    }
+    .category-hero img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+      opacity: 0.7;
+    }
+    .category-hero-text {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #fff; text-align: center;
+    }
+    .category-hero-text h1 {
+      font-size: 48px; font-weight: 900;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      margin-bottom: 10px;
+    }
+    .category-hero-text p {
+      font-size: 15px; letter-spacing: 0.04em; opacity: 0.9;
+    }
+
+    /* ── Sub-category Pills ── */
+    .subcats {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      padding: 24px 32px; border-bottom: 1px solid #e5e5e5;
+    }
+    .subcat-pill {
+      padding: 8px 20px; border: 1px solid #ccc;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .subcat-pill:hover, .subcat-pill.active { background: #111; color: #fff; border-color: #111; }
+
+    /* ── Toolbar ── */
+    .toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 32px; border-bottom: 1px solid #e5e5e5;
+    }
+    .toolbar-count { font-size: 13px; color: #666; }
+    .toolbar-sort {
+      font-size: 13px; border: 1px solid #ccc;
+      padding: 8px 12px; cursor: pointer; background: #fff;
+    }
+
+    /* ── Product Grid ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── Product Card ── */
+    .product-card { cursor: pointer; }
+    .product-card:hover .product-img { transform: scale(1.04); }
+
+    .product-img-wrap {
+      overflow: hidden; aspect-ratio: 3/4;
+      background: #f5f5f5; position: relative; margin-bottom: 10px;
+    }
+    .product-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease; display: block;
+    }
+    .product-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: #c8102e; color: #fff;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 7px;
+    }
+    .product-name {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.02em; margin-bottom: 5px; line-height: 1.4;
+    }
+    .product-prices { display: flex; gap: 6px; align-items: baseline; }
+    .price-sale { font-size: 13px; font-weight: 700; color: #c8102e; }
+    .price-original { font-size: 12px; color: #999; text-decoration: line-through; }
+    .product-colors { font-size: 11px; color: #888; margin-top: 3px; }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex; justify-content: center; gap: 8px;
+      padding: 40px 32px; border-top: 1px solid #e5e5e5;
+    }
+    .page-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid #e5e5e5; font-size: 13px; cursor: pointer;
+    }
+    .page-btn.active { background: #111; color: #fff; border-color: #111; }
+    .page-btn:hover:not(.active) { background: #f5f5f5; }
+
+    /* ── Footer ── */
+    footer { background: #111; color: #ccc; padding: 48px 32px 32px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto 40px; }
+    .footer-col h5 { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { font-size: 12px; line-height: 2.2; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { text-align: center; font-size: 11px; color: #666; border-top: 1px solid #333; padding-top: 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement -->
+  <div class="announcement">
+    FREE SHIPPING ON ORDERS $50+ &nbsp;&bull;&nbsp; UP TO 70% OFF SALE STYLES
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-links">
+      <a href="index.html#new">New</a>
+      <a href="index.html#women">Women</a>
+      <a href="index.html#men">Men</a>
+      <a href="kids.html" class="active">Kids</a>
+      <a href="index.html#w-denim">Denim</a>
+      <a href="index.html#sale">Sale</a>
+    </div>
+    <a class="nav-logo" href="index.html">Orion's</a>
+    <div class="nav-icons">
+      <a href="index.html#new">Search</a>
+      <a href="index.html#benefits">Rewards</a>
+      <a href="#">Account</a>
+      <a href="#">Bag (0)</a>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> &nbsp;/&nbsp;
+    <span>Kids</span>
+  </div>
+
+  <!-- Hero Banner -->
+  <div class="category-hero">
+    <img src="site/assets/images/ef960fa9bc7b.jpg" alt="Kids Collection" />
+    <div class="category-hero-text">
+      <h1>Kids</h1>
+      <p>Bold styles built for the next generation.</p>
+    </div>
+  </div>
+
+  <!-- Sub-category Pills -->
+  <div class="subcats">
+    <div class="subcat-pill active">All Kids</div>
+    <div class="subcat-pill">Jeans</div>
+    <div class="subcat-pill">Tees</div>
+    <div class="subcat-pill">Hoodies</div>
+    <div class="subcat-pill">Joggers</div>
+    <div class="subcat-pill">Shorts</div>
+    <div class="subcat-pill">Jackets</div>
+    <div class="subcat-pill">New Arrivals</div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-count">8 Products</div>
+    <select class="toolbar-sort">
+      <option>Sort By: Featured</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+      <option>New Arrivals</option>
+    </select>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
+
+    <a class="product-card" href="site/boys-logo-tee-300162.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/e655424a3108.jpg" alt="Boys Logo Tee" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Logo Tee</div>
+      <div class="product-prices">
+        <span class="price-sale">$17.99</span>
+        <span class="price-original">$54.00</span>
+      </div>
+      <div class="product-colors">3 Colors</div>
+    </a>
+
+    <a class="product-card" href="site/boys-rocco-jean-300180.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/948439f13e96.jpg" alt="Boys Rocco Jean" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Rocco Jean</div>
+      <div class="product-prices">
+        <span class="price-sale">$42.00</span>
+        <span class="price-original">$84.00</span>
+      </div>
+      <div class="product-colors">2 Colors</div>
+    </a>
+
+    <a class="product-card" href="site/boys-ricky-jean-300181.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/f765623c99c6.jpg" alt="Boys Ricky Jean" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Ricky Jean</div>
+      <div class="product-prices">
+        <span class="price-sale">$42.00</span>
+        <span class="price-original">$84.00</span>
+      </div>
+      <div class="product-colors">2 Colors</div>
+    </a>
+
+    <a class="product-card" href="site/boys-logo-zip-hoodie-300248.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/fe7f31d88e64.jpg" alt="Boys Logo Zip Hoodie" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Logo Zip Hoodie</div>
+      <div class="product-prices">
+        <span class="price-sale">$23.99</span>
+        <span class="price-original">$69.00</span>
+      </div>
+      <div class="product-colors">1 Color</div>
+    </a>
+
+    <a class="product-card" href="site/boys-cargo-short-300342.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/dcf14699d21c.jpg" alt="Boys Cargo Short" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Cargo Short</div>
+      <div class="product-prices">
+        <span class="price-sale">$44.40</span>
+        <span class="price-original">$74.00</span>
+      </div>
+      <div class="product-colors">2 Colors</div>
+    </a>
+
+    <a class="product-card" href="site/boys-buddha-sherpa-jacket-300414.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/533394077234.jpg" alt="Boys Buddha Sherpa Jacket" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Buddha Sherpa Jacket</div>
+      <div class="product-prices">
+        <span class="price-sale">$35.99</span>
+        <span class="price-original">$104.00</span>
+      </div>
+      <div class="product-colors">1 Color</div>
+    </a>
+
+    <a class="product-card" href="site/boys-logo-horseshoe-puffer-jacket-300401.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/ef960fa9bc7b.jpg" alt="Boys Logo Horseshoe Puffer Jacket" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Logo Horseshoe Puffer Jacket</div>
+      <div class="product-prices">
+        <span class="price-sale">$35.99</span>
+        <span class="price-original">$104.00</span>
+      </div>
+      <div class="product-colors">2 Colors</div>
+    </a>
+
+    <a class="product-card" href="site/boys-geno-slim-jean-300426.html.html">
+      <div class="product-img-wrap">
+        <img class="product-img" src="site/assets/images/2f9f6be7f9ab.jpg" alt="Boys Geno Slim Jean" />
+        <div class="product-badge">Sale</div>
+      </div>
+      <div class="product-name">Boys Geno Slim Jean</div>
+      <div class="product-prices">
+        <span class="price-sale">$34.98</span>
+        <span class="price-original">$84.00</span>
+      </div>
+      <div class="product-colors">1 Color</div>
+    </a>
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <div class="page-btn active">1</div>
+    <div class="page-btn">2</div>
+    <div class="page-btn">3</div>
+    <div class="page-btn">4</div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="index.html#new">New Arrivals</a></li>
+          <li><a href="index.html#women">Women</a></li>
+          <li><a href="index.html#men">Men</a></li>
+          <li><a href="kids.html">Kids</a></li>
+          <li><a href="index.html#w-denim">Denim</a></li>
+          <li><a href="index.html#sale">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Help</h5>
+        <ul>
+          <li><a href="#">Customer Service</a></li>
+          <li><a href="#">Order Status</a></li>
+          <li><a href="#">Returns &amp; Exchanges</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Store Locator</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Orion's</h5>
+        <ul>
+          <li><a href="index.html#benefits">Orion's Rewards</a></li>
+          <li><a href="index.html#benefits">Student Discount</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="index.html#benefits">Download the App</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Orion's. All Rights Reserved.
+      &nbsp;&bull;&nbsp; <a href="#">Privacy Policy</a>
+      &nbsp;&bull;&nbsp; <a href="#">Terms of Use</a>
+    </div>
+  </footer>
+
+</body>
+</html>
